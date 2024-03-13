@@ -1,0 +1,138 @@
+import { User } from "../models/user.model.js";
+import { ApiError } from "../utils/apiError.js";
+import { ApiResponse } from "../utils/apiResponse.js";
+import { asyncHandler } from "../utils/asyncHandler.js";
+
+const getRefreshAndAccessToken = async (userId)=> {
+    try {
+        const user = await User.findById(userId)
+        const accessToken = user.generateAccessToken()
+        const refreshToken = user.generateRefreshToken()
+    
+        user.refreshToken = refreshToken
+        await user.save({validateBeforeSave : false})
+    
+        return {
+            accessToken,
+            refreshToken
+        }
+    } catch (error) {
+        throw new ApiError(500, "Something went wrong during generating access and refresh tokens")
+    }
+}
+
+//register new user
+const registerUser = asyncHandler(async(req, res, next)=>{
+    const {username, password, fullname, vehicleNumbers } = req.body;
+    if (username === "" || password === "" || fullname === "") {
+        return next(new ApiError(400, "Please fill all the fields"));
+    }
+    // checking for valid password
+    const passwordRegex = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[!@#$%^&*]).{8,}$/gm
+    if (!passwordRegex.test(password)) {
+        throw new ApiError(500, "Password should contain Uppercase, lowercase, numbers, special charecterrs and should be at least 8 char long")
+    }
+    // checking for valid vehicle number
+    const vehicleNumberRegex = /^[A-Z]{2}\d{3}[A-Z]{2}$/;
+    vehicleNumbers.forEach(vehicleNumber => {
+        if (!vehicleNumberRegex.test(vehicleNumber)) {
+            throw new ApiError(500, "One or more vehicle numbers are not valid");
+        }
+    });
+     //checking if user already exists
+    const existedUser = await User.findOne({
+        $or : [
+            {username: username}, 
+            {vehicleNumbers: {$in: vehicleNumbers}}
+        ]
+    })
+    if (existedUser) {
+        throw new ApiError(509, "User already exists")
+    }
+
+    //creating a user
+    const user = await User.create({
+        username,
+        password,
+        fullname,
+        vehicleNumbers
+    })
+
+    const createdUser = await User.findOne(user._id).select(
+        "-password -refreshToken"
+    )
+
+    return res
+    .status(201)
+    .json(new ApiResponse(201, {createdUser}, "User created successfully"))
+})
+
+//Login user
+const loginUser = asyncHandler (async (req, res, next)=> {
+    const {username, password} = req.body
+    if (username === "" || password === "") {
+        throw new ApiError(400, "Please fill all the fields");
+    }
+    const user = await User.findOne({username})
+    if (!user) {
+        throw new ApiError(404, "User not found")
+    }
+    const isPasswordValid = await user.isPasswordCorrect(password)
+    if (!isPasswordValid) {
+        throw new ApiError(401, "Invalid login credentials")
+    }
+
+    const {accessToken , refreshToken } = await getRefreshAndAccessToken(user._id)
+
+    const loggedInUser = await User.findById(user._id).select("-password -refreshToken ")
+    
+    const options = {
+        httpOnly : true,
+        secure : true
+    }
+    
+    return res
+    .status(200)
+    .cookie("refreshToken", refreshToken, options)
+    .cookie("accessToken", accessToken, options)
+    .json(
+        new ApiResponse(
+            200,
+            {
+                user : loggedInUser, accessToken, refreshToken
+            },
+            "Successfully logged In "
+        )
+    )
+})
+
+//logout user 
+const logoutUser = asyncHandler(async (req, res, next)=> {
+    await User.findByIdAndUpdate(
+        req.user._id,
+        {
+            $unset : {
+                refreshToken : 1
+            }
+        },
+        {
+            new : true
+        }
+    )
+
+    const options = {
+        httpOnly : true,
+        secure : true
+    }
+
+    res.status(200)
+    .clearCookie("refreshToken", options)
+    .clearCookie("accessToken", options)
+    .json(new ApiResponse(200, {}, "User logged out successfully"))
+})
+
+export {
+    registerUser,
+    loginUser,
+    logoutUser
+}

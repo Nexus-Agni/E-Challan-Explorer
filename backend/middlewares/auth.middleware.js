@@ -10,6 +10,7 @@
 //         const token = req.cookies?.accessToken || req.header("Authorization")?.replace("Bearer ", "")
 //         console.log(token);
 //         if (!token) {
+//             console.log("Token not found");
 //             throw new ApiError(401, "Unauthorized request")
 //         }
     

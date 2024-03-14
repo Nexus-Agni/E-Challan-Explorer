@@ -1,4 +1,4 @@
-import mongoose, {Schema} from "mongoose";
+import mongoose, {Mongoose, Schema} from "mongoose";
 import  jwt  from "jsonwebtoken";
 import bcrypt from "bcrypt";
 
@@ -12,6 +12,10 @@ const UserSchema = new Schema({
         type: String,
         required: true
     },
+    adminAccess : {
+        type: Boolean,
+        default: false
+    },
     password : {
         type: String,
         required: true
@@ -20,7 +24,12 @@ const UserSchema = new Schema({
         type : String,
     },
     vehicleNumbers : [{
-        type: String
+        vehicleNumber: { type: String },
+        fineImposed : {
+            type: Number,
+            min : 0,
+            default: () => Math.random() < 0.5 ? 0 : 100,
+        }
     }]
 }, {
     timestamps: true

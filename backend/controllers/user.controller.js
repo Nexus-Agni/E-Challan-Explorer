@@ -3,27 +3,28 @@ import { ApiError } from "../utils/apiError.js";
 import { ApiResponse } from "../utils/apiResponse.js";
 import { asyncHandler } from "../utils/asyncHandler.js";
 
-const getRefreshAndAccessToken = async (userId)=> {
+const getAccessToken = async (userId)=> {
     try {
         const user = await User.findById(userId)
         const accessToken = user.generateAccessToken()
-        const refreshToken = user.generateRefreshToken()
+        // const refreshToken = user.generateRefreshToken()
     
-        user.refreshToken = refreshToken
+        // user.refreshToken = refreshToken
         await user.save({validateBeforeSave : false})
     
         return {
             accessToken,
-            refreshToken
+            // refreshToken
         }
     } catch (error) {
+        console.log(error);
         throw new ApiError(500, "Something went wrong during generating access and refresh tokens")
     }
 }
 
 //register new user
 const registerUser = asyncHandler(async(req, res, next)=>{
-    const {username, password, fullname, vehicleNumbers } = req.body;
+    const {username, password, fullname, vehicleNumbers, adminAccess } = req.body;
     if (username === "" || password === "" || fullname === "") {
         return next(new ApiError(400, "Please fill all the fields"));
     }
@@ -34,8 +35,13 @@ const registerUser = asyncHandler(async(req, res, next)=>{
     }
     // checking for valid vehicle number
     const vehicleNumberRegex = /^[A-Z]{2}\d{3}[A-Z]{2}$/;
-    vehicleNumbers.forEach(vehicleNumber => {
-        if (!vehicleNumberRegex.test(vehicleNumber)) {
+    // vehicleNumbers.forEach(vehicleNumber => {
+    //     if (!vehicleNumberRegex.test(vehicleNumber)) {
+    //         throw new ApiError(500, "One or more vehicle numbers are not valid");
+    //     }
+    // });
+    vehicleNumbers.forEach(vehicle => {
+        if (!vehicleNumberRegex.test(vehicle.vehicleNumber)) {
             throw new ApiError(500, "One or more vehicle numbers are not valid");
         }
     });
@@ -55,7 +61,8 @@ const registerUser = asyncHandler(async(req, res, next)=>{
         username,
         password,
         fullname,
-        vehicleNumbers
+        vehicleNumbers,
+        adminAccess
     })
 
     const createdUser = await User.findOne(user._id).select(
@@ -82,9 +89,9 @@ const loginUser = asyncHandler (async (req, res, next)=> {
         throw new ApiError(401, "Invalid login credentials")
     }
 
-    const {accessToken , refreshToken } = await getRefreshAndAccessToken(user._id)
+    const {accessToken } = await getAccessToken(user._id)
 
-    const loggedInUser = await User.findById(user._id).select("-password -refreshToken -accessToken ")
+    const loggedInUser = await User.findById(user._id).select("-password -accessToken ")
     
     const options = {
         httpOnly : true,
@@ -93,13 +100,13 @@ const loginUser = asyncHandler (async (req, res, next)=> {
     
     return res
     .status(200)
-    .cookie("refreshToken", refreshToken, options)
+    // .cookie("refreshToken", refreshToken, options)
     .cookie("accessToken", accessToken, options)
     .json(
         new ApiResponse(
             200,
             {
-                user : loggedInUser, accessToken, refreshToken
+                user : loggedInUser, accessToken
             },
             "Successfully logged In "
         )

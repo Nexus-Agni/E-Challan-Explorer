@@ -9,7 +9,7 @@ function Hero() {
         backgroundRepeat: "no-repeat",
       }}
     >
-      <div className="mx-auto w-full px-8">
+      <div className="mx-auto w-[1182px] px-8">
         <div className="flex flex-col justify-center px-4 py-12 md:py-16">
           <div className="mt-8 flex max-w-max items-center space-x-2 rounded-full bg-gray-100 p-1">
             <div className="rounded-full bg-white p-1 px-2">

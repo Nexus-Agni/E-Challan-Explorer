@@ -1,6 +1,31 @@
 import { ArrowRight } from "lucide-react";
+import { useState } from "react";
+import axios from "axios";
+
 
 function Login() {
+  const [adminAccess, setAdminAccess] = useState(false);
+  const [username, setUsername] = useState("");
+  const [password, setPassword] = useState("");
+  
+  const handleLogin = (e) => {
+    e.preventDefault();
+    const formData = {
+      username: username,
+      password: password,
+      // adminAccess: adminAccess
+    }
+    axios.post('http://localhost:8000/api/v1/users/login', formData) 
+    .then((response) => {
+      console.log(response)
+    })
+    .catch((error) => {
+      console.log(error)
+    })
+    setUsername("");
+    setPassword("");
+  };
+
   return (
     <section className="bg-gradient-to-r from-[#DE4982] to-[#EC8F4F] h-screen">
       <div className="grid grid-cols-1 lg:grid-cols-1 bg-gradient-to-r from-[#DE4982] to-[#EC8F4F]">
@@ -18,8 +43,9 @@ function Login() {
                       <label className="relative inline-flex items-center cursor-pointer">
                       <input
                           type="checkbox"
-                          value=""
                           className="sr-only peer"
+                          value={adminAccess}
+                          onChange={(e) => {setAdminAccess(e.target.checked)}}
                       />
                       <div className="w-11 h-6 bg-gray-400 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-blue-300  rounded-full peer  peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-whiteafter:border after:rounded-full after:h-5 after:w-5 after:transition-all  peer-checked:bg-blue-600"></div>
                       <span className="text-base font-medium text-gray-100 ml-2">Are you an admin ?</span>
@@ -36,8 +62,10 @@ function Login() {
                   <div className="mt-2">
                     <input
                       className="flex h-10 w-full rounded-xl border border-gray-100 bg-transparent px-3 py-2 text-sm placeholder:text-gray-200 focus:outline-none focus:ring-1 focus:ring-gray-200 focus:ring-offset-1 disabled:cursor-not-allowed disabled:opacity-50"
-                      type="email"
+                      type="username"
                       placeholder="Username"
+                      value={username}
+                      onChange={(e) => {setUsername(e.target.value)}}
                     ></input>
                   </div>
                 </div>
@@ -64,6 +92,8 @@ function Login() {
                       className="flex h-10 w-full rounded-xl border border-gray-100 bg-transparent px-3 py-2 text-sm placeholder:text-gray-200 focus:outline-none focus:ring-1 focus:ring-gray-200 focus:ring-offset-1 disabled:cursor-not-allowed disabled:opacity-50"
                       type="password"
                       placeholder="Password"
+                      value={password}
+                      onChange={(e) => {setPassword(e.target.value)}}
                     ></input>
                   </div>
                 </div>
@@ -71,6 +101,7 @@ function Login() {
                   <button
                     type="button"
                     className="inline-flex w-full items-center justify-center rounded-3xl bg-gradient-to-r from-[#6749de] to-[#4fec57] px-3.5 py-2.5 font-semibold leading-7 text-black hover:scale-105"
+                    onClick={handleLogin}
                   >
                     Get started <ArrowRight className="ml-2" size={16} />
                   </button>

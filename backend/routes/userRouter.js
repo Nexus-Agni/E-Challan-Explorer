@@ -5,7 +5,7 @@ import { verifyJWT } from "../middlewares/auth.middleware.js";
 const userRouter = Router()
 
 userRouter.route('/register').post(registerUser)
-userRouter.route('/login').get(loginUser)
-userRouter.route('/logout').get(verifyJWT,logoutUser)
+userRouter.route('/login').post(loginUser)
+userRouter.route('/logout').post(verifyJWT,logoutUser)
 
 export default userRouter;

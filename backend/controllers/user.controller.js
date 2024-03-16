@@ -35,11 +35,6 @@ const registerUser = asyncHandler(async(req, res, next)=>{
     }
     // checking for valid vehicle number
     const vehicleNumberRegex = /^[A-Z]{2}\d{3}[A-Z]{2}$/;
-    // vehicleNumbers.forEach(vehicleNumber => {
-    //     if (!vehicleNumberRegex.test(vehicleNumber)) {
-    //         throw new ApiError(500, "One or more vehicle numbers are not valid");
-    //     }
-    // });
     vehicleNumbers.forEach(vehicle => {
         if (!vehicleNumberRegex.test(vehicle.vehicleNumber)) {
             throw new ApiError(500, "One or more vehicle numbers are not valid");

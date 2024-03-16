@@ -1,6 +1,7 @@
 function Footer() {
   return (
-    <div className="mx-auto mt-12 max-w-7xl">
+    <div className="bg-gradient-to-r from-[#DE4982] to-[#EC8F4F] w-screen">
+    <div className="mx-auto mt-12 max-w-7xl bg-gradient-to-r from-[#DE4982] to-[#EC8F4F]">
       <footer className="px-4 py-10">
         <div className="mt-16 grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5">
           <div className="mb-8 lg:mb-0">
@@ -59,6 +60,7 @@ function Footer() {
           </div>
         </div>
       </footer>
+    </div>
     </div>
   );
 }

@@ -1,4 +1,5 @@
 import waveSVG from "../assets/wave.svg";
+import Logo from "../assets/Logo.png"
 
 function Hero() {
   return (
@@ -17,6 +18,11 @@ function Hero() {
             </div>
             <p className="text-sm font-medium">Join our team &rarr;</p>
           </div>
+          <div>
+            
+          </div>
+          <div className="flex">
+          <div className="flex flex-col">
           <h1 className="mt-8 text-3xl font-bold tracking-tight text-black md:text-4xl lg:text-6xl overflow-hidden  whitespace-nowrap animate-typewriter">
             E Challan Explorer
           </h1>
@@ -24,7 +30,13 @@ function Hero() {
             Pay your Challans online anytime, anywhere and get rid of the hassle
             of standing in long queues.
           </p>
+          </div>
+          <div className="py-0 my-0">
+          <img src={Logo} alt="Logo" className="py-0 my-0"/>
+          </div>
         </div>
+        </div>
+        
       </div>
     </div>
   );

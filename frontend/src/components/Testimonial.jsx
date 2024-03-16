@@ -3,7 +3,7 @@ import { ArrowLeft, ArrowRight } from "lucide-react";
 
 const testimonials = [
   {
-    text: "This is a fantastic product. It really helped my business grow!",
+    text: "This is a fantastic product. It really helped my !",
     name: "John Doe",
     role: "Business Owner",
     image:
@@ -46,8 +46,8 @@ function Testimonial() {
   return (
     <section className="px-2 py-10 md:px-0">
       <div>
-        <h2 className="text-3xl font-bold text-center text-black">
-          What our customers are saying about us
+        <h2 className="text-4xl font-bold text-center text-black">
+          OUR TEAM MEMBERS
         </h2>
       </div>
       <div className="mx-auto max-w-4xl flex items-center py-4">
@@ -57,7 +57,7 @@ function Testimonial() {
         >
           <ArrowLeft />
         </button>
-        <div className="flex-grow">
+        <div className="flex-grow max-w-[40rem]">
           {testimonials.map((testimonial, index) => (
             <div key={index} className={index === current ? "block" : "hidden"}>
               <div className="md:flex md:items-center md:justify-center md:space-x-14">
@@ -70,7 +70,7 @@ function Testimonial() {
                 </div>
                 <div className="mt-10 md:mt-0 bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4">
                   <blockquote>
-                    <p className="text-xl text-black">{testimonial.text}</p>
+                    <p className="text-xl text-black overflow-x-hidden">{testimonial.text}</p>
                   </blockquote>
                   <p className="mt-7 text-lg font-semibold text-black">
                     {testimonial.name}

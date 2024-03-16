@@ -1,29 +1,34 @@
 import { ArrowRight } from "lucide-react";
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import axios from "axios";
-
 
 function Login() {
   const [adminAccess, setAdminAccess] = useState(false);
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
+  const navigate = useNavigate();
   
   const handleLogin = (e) => {
     e.preventDefault();
     const formData = {
       username: username,
       password: password,
-      // adminAccess: adminAccess
     }
     axios.post('http://localhost:8000/api/v1/users/login', formData) 
     .then((response) => {
-      console.log(response)
+      console.log(response.data)
+      const data = response.data;
+
+      if (data.data.user.adminAccess === true) {
+        navigate("/admin");
+      } else {
+        navigate("/user");
+      }
     })
     .catch((error) => {
       console.log(error)
     })
-    setUsername("");
-    setPassword("");
   };
 
   return (

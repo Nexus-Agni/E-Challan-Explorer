@@ -3,10 +3,10 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 
-function Login() {
-  const [adminAccess, setAdminAccess] = useState(false);
+function Login({setData}) {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
+  const [error, setError] = useState("")
   const navigate = useNavigate();
   
   const handleLogin = (e) => {
@@ -17,16 +17,18 @@ function Login() {
     }
     axios.post('http://localhost:8000/api/v1/users/login', formData) 
     .then((response) => {
-      console.log(response.data)
+      // console.log(response.data)
       const data = response.data;
-
-      if (data.data.user.adminAccess === true) {
+      const userData = data?data.data.user:null;
+      setData(userData);
+      if (userData.adminAccess === true) {
         navigate("/admin");
       } else {
         navigate("/user");
       }
     })
     .catch((error) => {
+      setError(error.response.data.message)
       console.log(error)
     })
   };
@@ -42,21 +44,6 @@ function Login() {
             <form action="#" method="POST" className="mt-8">
               <div className="space-y-5">
                 <div>
-                  <div className="space-x-2">
-                  {/* <input type="checkbox" name="adminAccess" id="adminAccess" />
-                  <label htmlFor="adminAccess" className="text-base font-medium text-gray-100">Are you an admin ?</label> */}
-                      <label className="relative inline-flex items-center cursor-pointer">
-                      <input
-                          type="checkbox"
-                          className="sr-only peer"
-                          value={adminAccess}
-                          onChange={(e) => {setAdminAccess(e.target.checked)}}
-                      />
-                      <div className="w-11 h-6 bg-gray-400 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-blue-300  rounded-full peer  peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-whiteafter:border after:rounded-full after:h-5 after:w-5 after:transition-all  peer-checked:bg-blue-600"></div>
-                      <span className="text-base font-medium text-gray-100 ml-2">Are you an admin ?</span>
-                  </label>
-                  </div>
-                  <br />
                   <label
                     htmlFor=""
                     className="text-base font-medium text-gray-100"
@@ -66,11 +53,12 @@ function Login() {
                   </label>
                   <div className="mt-2">
                     <input
-                      className="flex h-10 w-full rounded-xl border border-gray-100 bg-transparent px-3 py-2 text-sm placeholder:text-gray-200 focus:outline-none focus:ring-1 focus:ring-gray-200 focus:ring-offset-1 disabled:cursor-not-allowed disabled:opacity-50"
+                      className="flex h-10 w-full rounded-xl border border-gray-100 bg-transparent px-3 py-2 text-sm placeholder:text-gray-200 focus:outline-none focus:ring-1 focus:ring-gray-200 focus:ring-offset-1 disabled:cursor-not-allowed disabled:opacity-50 text-white"
                       type="username"
                       placeholder="Username"
                       value={username}
                       onChange={(e) => {setUsername(e.target.value)}}
+                      required
                     ></input>
                   </div>
                 </div>
@@ -94,11 +82,12 @@ function Login() {
                   </div>
                   <div className="mt-2">
                     <input
-                      className="flex h-10 w-full rounded-xl border border-gray-100 bg-transparent px-3 py-2 text-sm placeholder:text-gray-200 focus:outline-none focus:ring-1 focus:ring-gray-200 focus:ring-offset-1 disabled:cursor-not-allowed disabled:opacity-50"
+                      className="flex h-10 w-full rounded-xl border border-gray-100 bg-transparent px-3 py-2 text-sm placeholder:text-gray-200 focus:outline-none focus:ring-1 focus:ring-gray-200 focus:ring-offset-1 disabled:cursor-not-allowed disabled:opacity-50 text-white"
                       type="password"
                       placeholder="Password"
                       value={password}
                       onChange={(e) => {setPassword(e.target.value)}}
+                      required
                     ></input>
                   </div>
                 </div>
@@ -118,14 +107,16 @@ function Login() {
             
           </div>
         </div>
-        {/* <div className="h-full w-full">
-          <img
-            className="mx-auto h-full w-full rounded-md object-cover"
-            src="https://images.unsplash.com/photo-1630673245362-f69d2b93880e?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1740&q=80"
-            alt=""
-          />
-        </div> */}
+        
       </div>
+      {error !== "" ?
+       <div className="w-full flex justify-center items-center  ">
+        
+       <h1 className="text-3xl bg-red-700 px-4 py-2 border rounded-xl outline-none border-red-700 text-white">{error}</h1>
+     </div>
+     : null
+      }
+     
     </section>
   );
 }

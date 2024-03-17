@@ -5,10 +5,8 @@ function Footer() {
         <footer className="px-4 py-10">
           <div className="mt-16 grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5">
             <div className="mb-8 lg:mb-0">
-              <p className="mb-6 text-lg font-semibold text-gray-700">
-                Company
-              </p>
-              <ul className="flex flex-col space-y-4 text-[14px] font-medium text-gray-500">
+              <p className="mb-6 text-lg font-bold text-white">Company</p>
+              <ul className="flex flex-col space-y-4 text-[14px] font-medium text-gray-200">
                 <li>About us</li>
                 <li>Company History</li>
                 <li>Our Team</li>
@@ -17,10 +15,8 @@ function Footer() {
               </ul>
             </div>
             <div className="mb-8 lg:mb-0">
-              <p className="mb-6 text-lg font-semibold text-gray-700">
-                Our Stores
-              </p>
-              <ul className="flex flex-col space-y-4 text-[14px] font-medium text-gray-500">
+              <p className="mb-6 text-lg font-bold text-white">Our Stores</p>
+              <ul className="flex flex-col space-y-4 text-[14px] font-medium text-gray-200">
                 <li>Washington</li>
                 <li>New Hampshire</li>
                 <li>Maine</li>
@@ -29,10 +25,8 @@ function Footer() {
               </ul>
             </div>
             <div className="mb-8 lg:mb-0">
-              <p className="mb-6 text-lg font-semibold text-gray-700">
-                Services
-              </p>
-              <ul className="flex flex-col space-y-4 text-[14px] font-medium text-gray-500">
+              <p className="mb-6 text-lg font-bold text-white">Services</p>
+              <ul className="flex flex-col space-y-4 text-[14px] font-medium text-gray-200">
                 <li>UI / UX Design</li>
                 <li>App Development</li>
                 <li>API reference</li>
@@ -41,8 +35,8 @@ function Footer() {
               </ul>
             </div>
             <div className="mb-8 lg:mb-0">
-              <p className="mb-6 text-lg font-semibold text-gray-700">Legal</p>
-              <ul className="flex flex-col space-y-4 text-[14px] font-medium text-gray-500">
+              <p className="mb-6 text-lg font-bold text-white">Legal</p>
+              <ul className="flex flex-col space-y-4 text-[14px] font-medium text-gray-200">
                 <li>Privacy Policy</li>
                 <li>Terms of Service</li>
                 <li>Cookie Policy</li>
@@ -51,10 +45,8 @@ function Footer() {
               </ul>
             </div>
             <div className="mb-8 lg:mb-0">
-              <p className="mb-6 text-lg font-semibold text-gray-700">
-                Social Links
-              </p>
-              <ul className="flex flex-col space-y-4 text-[14px] font-medium text-gray-500">
+              <p className="mb-6 text-lg font-bold text-white">Social Links</p>
+              <ul className="flex flex-col space-y-4 text-[14px] font-medium text-gray-200">
                 <li>Facebook</li>
                 <li>Twitter</li>
                 <li>Instagram</li>

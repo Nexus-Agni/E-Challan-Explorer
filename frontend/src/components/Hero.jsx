@@ -1,7 +1,17 @@
 import waveSVG from "../assets/wave.svg";
-import Logo from "../assets/Logo.png";
+import Car from "../assets/Car.json";
+import Lottie from "react-lottie";
 
 function Hero() {
+  const defaultOptions = {
+    loop: true,
+    autoplay: true,
+    animationData: Car,
+    rendererSettings: {
+      preserveAspectRatio: "xMidYMid slice",
+    },
+  };
+
   return (
     <div
       className="relative w-full bg-white"
@@ -22,8 +32,8 @@ function Hero() {
                 hassle of standing in long queues.
               </p>
             </div>
-            <div className="py-0 my-0">
-              <img src={Logo} alt="Logo" className="py-0 my-0" />
+            <div className="py-0 my-0 flex-grow">
+              <Lottie options={defaultOptions} height="100%" width="100%" />
             </div>
           </div>
         </div>

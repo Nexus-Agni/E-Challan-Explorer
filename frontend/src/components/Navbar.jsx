@@ -4,15 +4,15 @@ import { Menu, X } from "lucide-react";
 import Logo from "../assets/Logo.png"
 const menuItems = [
   {
-    name: "Home",
+    name: "",
     href: "#",
   },
   {
-    name: "About",
+    name: "",
     href: "#",
   },
   {
-    name: "Contact",
+    name: "",
     href: "#",
   },
 ];
@@ -108,7 +108,7 @@ function Navbar() {
                 </div>
                 <button
                   type="button"
-                  className="mt-4 w-full rounded-3xl bg-black px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-black/80 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-black "
+                  className="mt-4 w-full rounded-3xl bg-black px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-black/80 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-black hover:scale-105 ease-in-out "
                 >
                   <Link to="/login">Login</Link>
                 </button>

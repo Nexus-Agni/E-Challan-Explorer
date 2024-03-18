@@ -36,9 +36,9 @@ function Login({ setData }) {
   };
 
   return (
-    <section className="bg-gradient-to-r from-[#DE4982] to-[#EC8F4F] h-full">
+    <section className="bg-gradient-to-r from-[#DE4982] to-[#EC8F4F] h-screen overflow-hidden">
       <div
-        className="grid grid-cols-1 lg:grid-cols-1 bg-gradient-to-r from-[#DE4982] to-[#EC8F4F]"
+        className="grid grid-cols-1 lg:grid-cols-1 bg-gradient-to-r from-[#DE4982] to-[#EC8F4F] h-screen overflow-hidden  "
         style={{
           backgroundImage: `url(${Background})`,
           backgroundRepeat: "no-repeat",
@@ -118,14 +118,15 @@ function Login({ setData }) {
             </form>
           </div>
         </div>
-      </div>
-      {error !== "" ? (
+        {error !== "" ? (
         <div className="w-full flex justify-center items-center  ">
           <h1 className="text-3xl bg-red-700 px-4 py-2 border rounded-xl outline-none border-red-700 text-white">
             {error}
           </h1>
         </div>
       ) : null}
+      </div>
+      
     </section>
   );
 }

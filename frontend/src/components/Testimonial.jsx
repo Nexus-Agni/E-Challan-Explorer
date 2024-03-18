@@ -70,7 +70,7 @@ function Testimonial() {
                 </div>
                 <div className="mt-10 md:mt-0 bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4">
                   <blockquote>
-                    <p className="text-xl text-black overflow-x-hidden">{testimonial.text}</p>
+                    <p className="text-xl text-black overflow-x-hidden ">{testimonial.text}</p>
                   </blockquote>
                   <p className="mt-7 text-lg font-semibold text-black">
                     {testimonial.name}

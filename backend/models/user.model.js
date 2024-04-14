@@ -28,7 +28,7 @@ const UserSchema = new Schema({
         fineImposed : {
             type: Number,
             min : 0,
-            default: () => Math.random() < 0.5 ? 0 : 100,
+            // default: () => Math.random() < 0.5 ? 0 : 100,
         }
     }]
 }, {

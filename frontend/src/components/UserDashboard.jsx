@@ -43,9 +43,9 @@ function UserDashboard({data}) {
             Welcome {fullname}
           </h2>
           <div className="flex flex-row justify-evenly flex-wrap p-4 ">
-            {vehicleNumbers.map((vehicleNumber) => {
+            {vehicleNumbers.map((vehicleNumber, index) => {
               return (
-                <div className="bg-white shadow p-4 flex justify-center items-center rounded-2xl">
+                <div key={index} className="bg-white shadow p-4 flex justify-center items-center rounded-2xl">
                   <Card username={username} fullname={fullname} vehicleNumber={vehicleNumber}/>
                 </div>
               );

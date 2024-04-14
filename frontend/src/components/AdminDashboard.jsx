@@ -1,4 +1,5 @@
 import { Card } from "./Card";
+import { Link } from "react-router-dom";
 
 function AdminDashboard({data}) {
   const {username, fullname, vehicleNumbers} = data;
@@ -13,12 +14,12 @@ function AdminDashboard({data}) {
         <div className="mt-6 flex flex-1 flex-col justify-between">
           <nav className="-mx-3 space-y-6 ">
             <div className="space-y-3 ">
-              <a
+              <Link
                 className="flex transform items-center rounded-lg px-3 py-2 text-gray-200 transition-colors duration-300 hover:bg-gray-50 hover:text-gray-700"
-                href="#"
+                to="/adduser"
               >
-                <span className="mx-2 text-sm font-medium">Add User</span>
-              </a>
+                <span className="mx-2 text-sm font-medium"> Add User</span>
+              </Link>
               <a
                 className="flex transform items-center rounded-lg px-3 py-2 text-gray-200 transition-colors duration-300 hover:bg-gray-100 hover:text-gray-700"
                 href="#"
@@ -61,9 +62,9 @@ function AdminDashboard({data}) {
             Welcome {fullname}
           </h2>
           <div className="flex flex-row justify-evenly flex-wrap p-4 ">
-            {vehicleNumbers.map((vehicleNumber) => {
+            {vehicleNumbers.map((vehicleNumber,index) => {
               return (
-                <div className="bg-white shadow p-4 flex justify-center items-center rounded-2xl">
+                <div key={index} className="bg-white shadow p-4 flex justify-center items-center rounded-2xl">
                   <Card username={username} fullname={fullname} vehicleNumber={vehicleNumber}/>
                 </div>
               );

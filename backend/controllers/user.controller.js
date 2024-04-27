@@ -179,9 +179,24 @@ const logoutUser = asyncHandler(async (req, res, next)=> {
 
 // })
 
+//get list of all users
+const getAllUsers = asyncHandler(async (req, res, next)=>{
+    //check if the request is only from admin
+    // if (!req.user.adminAccess) {
+    //     throw new ApiError(403, "You are not authorized to access this route")
+    // }
+    const users = await User.find().select("-password -refreshToken")
+    res.status(200).json(new ApiResponse(
+        200,
+        {users}, 
+        "List of all users"
+    ))
+})
+
 export {
     registerUser,
     loginUser,
     logoutUser,
+    getAllUsers,
     // refreshAccessToken
 }

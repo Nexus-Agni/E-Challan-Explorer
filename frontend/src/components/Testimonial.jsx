@@ -4,28 +4,35 @@ import { ArrowLeft, ArrowRight } from "lucide-react";
 const testimonials = [
   {
     text: "This is a fantastic product. It really helped my !",
-    name: "John Doe",
+    name: "N.Dhanunjaya",
     role: "Business Owner",
     image:
       "https://images.unsplash.com/photo-1633332755192-727a05c4013d?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mnx8dXNlcnxlbnwwfHwwfHw%3D&auto=format&fit=crop&w=800&q=60",
   },
   {
     text: "I love this service. It's really improved my workflow!",
-    name: "Jane Smith",
+    name: "N.Kanthi Kiran",
     role: "Freelancer",
     image:
       "https://images.unsplash.com/photo-1633332755192-727a05c4013d?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mnx8dXNlcnxlbnwwfHwwfHw%3D&auto=format&fit=crop&w=800&q=60",
   },
   {
     text: "Incredible product, really helped me out",
-    name: "James Johnson",
+    name: "N.Rugved",
     role: "Business Owner",
     image:
       "https://images.unsplash.com/photo-1633332755192-727a05c4013d?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mnx8dXNlcnxlbnwwfHwwfHw%3D&auto=format&fit=crop&w=800&q=60",
   },
   {
     text: "I don't know how I lived without this product",
-    name: "Theresa Webb",
+    name: "P.V.M. Prem Sai",
+    role: "Web Designer",
+    image:
+      "https://images.unsplash.com/photo-1633332755192-727a05c4013d?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mnx8dXNlcnxlbnwwfHwwfHw%3D&auto=format&fit=crop&w=800&q=60",
+  },
+  {
+    text: "I don't know how I lived without this product",
+    name: "M.S.Satwick",
     role: "Web Designer",
     image:
       "https://images.unsplash.com/photo-1633332755192-727a05c4013d?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mnx8dXNlcnxlbnwwfHwwfHw%3D&auto=format&fit=crop&w=800&q=60",
@@ -61,13 +68,13 @@ function Testimonial() {
           {testimonials.map((testimonial, index) => (
             <div key={index} className={index === current ? "block" : "hidden"}>
               <div className="md:flex md:items-center md:justify-center md:space-x-14">
-                <div className="relative h-48 w-48 flex-shrink-0">
+                {/* <div className="relative h-48 w-48 flex-shrink-0">
                   <img
                     className="relative h-15 w-15 rounded-full object-cover"
                     src={testimonial.image}
                     alt={testimonial.name}
                   />
-                </div>
+                </div> */}
                 <div className="mt-10 md:mt-0 bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4">
                   <blockquote>
                     <p className="text-xl text-black overflow-x-hidden ">{testimonial.text}</p>

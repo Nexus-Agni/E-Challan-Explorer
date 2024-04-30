@@ -91,30 +91,14 @@ function AddNewUser({data}) {
                     Add User
                   </span>
               </Link>
-              <a
+              <Link
                 className="flex transform items-center rounded-lg px-3 py-2 text-gray-200 transition-colors duration-300 hover:bg-gray-100 hover:text-gray-700"
-                href="#"
-              >
-                <span className="mx-2 text-sm font-medium">
-                  Add New Challan
-                </span>
-              </a>
-
-              <a
-                className="flex transform items-center rounded-lg px-3 py-2 text-gray-200 transition-colors duration-300 hover:bg-gray-100 hover:text-gray-700"
-                href="#"
-              >
-                <span className="mx-2 text-sm font-medium">Add Vehicle</span>
-              </a>
-
-              <a
-                className="flex transform items-center rounded-lg px-3 py-2 text-gray-200 transition-colors duration-300 hover:bg-gray-100 hover:text-gray-700"
-                href="#"
+                to={`/showAllUsers`}
               >
                 <span className="mx-2 text-sm font-medium">
                   View User History
                 </span>
-              </a>
+              </Link>
             </div>
           </nav>
         </div>

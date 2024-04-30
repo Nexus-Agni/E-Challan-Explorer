@@ -13,20 +13,7 @@ function UserDashboard({data}) {
         <div className="mt-6 flex flex-1 flex-col justify-between">
           <nav className="-mx-3 space-y-6 ">
             <div className="space-y-3 ">
-              <a
-                className="flex transform items-center rounded-lg px-3 py-2 text-gray-200 transition-colors duration-300 hover:bg-gray-50 hover:text-gray-700"
-                href="#"
-              >
-                <span className="mx-2 text-sm font-medium">
-                  Active Challans
-                </span>
-              </a>
-              <a
-                className="flex transform items-center rounded-lg px-3 py-2 text-gray-200 transition-colors duration-300 hover:bg-gray-100 hover:text-gray-700"
-                href="#"
-              >
-                <span className="mx-2 text-sm font-medium">History</span>
-              </a>
+              
             </div>
           </nav>
         </div>

@@ -83,14 +83,6 @@ function Login({ setData }) {
                       {" "}
                       Password{" "}
                     </label>
-                    <a
-                      href="#"
-                      title=""
-                      className="text-sm font-semibold text-white hover:underline"
-                    >
-                      {" "}
-                      Forgot password?{" "}
-                    </a>
                   </div>
                   <div className="mt-2">
                     <input

@@ -33,8 +33,8 @@ const registerUser = asyncHandler(async(req, res, next)=>{
     if (!passwordRegex.test(password)) {
         throw new ApiError(500, "Password should contain Uppercase, lowercase, numbers, special charecterrs and should be at least 8 char long")
     }
-    // checking for valid vehicle number
-    const vehicleNumberRegex = /^[A-Z]{2}\d{3}[A-Z]{2}$/;
+    // checking for valid vehicle number according to Indian standards
+    const vehicleNumberRegex = /^[A-Z]{2}\d{2}[A-Z]{2}\d{4}$/;
     vehicleNumbers.forEach(vehicle => {
         if (!vehicleNumberRegex.test(vehicle.vehicleNumber)) {
             throw new ApiError(500, "One or more vehicle numbers are not valid");
